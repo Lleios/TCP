@@ -11,9 +11,7 @@ public class Serveur {
 		Thread t = new Thread(new Accepter_clients(socket));
 		t.start();
 		System.out.println("Mes employeurs sont prêts !");
-		
 		} catch (IOException e) {
-			
 			e.printStackTrace();
 		}
 	}
@@ -24,9 +22,10 @@ class Accepter_clients implements Runnable {
 	   private ServerSocket socketserver;
 	   private Socket socket;
 	   private int nbrclient = 1;
-		public Accepter_clients(ServerSocket s){
-			socketserver = s;
-		}
+	   
+	   public Accepter_clients(ServerSocket s){
+		   socketserver = s;
+	   }
 		
 		public void run() {
 

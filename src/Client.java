@@ -10,7 +10,6 @@ public class Client {
 		socket = new Socket("localhost",2009);
 		socket.close();
 		} catch (IOException e) {
-			
 			e.printStackTrace();
 		}
 	}
