@@ -1,0 +1,4 @@
+Port = 2009
+Duree_inactivite = 100
+Nb_connexionx = 10
+implementation = serveur
