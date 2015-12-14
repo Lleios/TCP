@@ -1,9 +1,26 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Properties;
 
 public class Serveur {
 
-	public static void main(String[] zero){
+	public static void main(String[] zero) throws IOException{
+		
+		Properties properties = new Properties();
+		FileInputStream fileStream = null;
+		try {
+			fileStream = new FileInputStream("../../config.txt");
+			properties.load(fileStream);
+			System.out.println(properties.getProperty("Port"));
+			System.out.println(properties.getProperty("IP"));
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}finally {
+		      fileStream.close();
+		}
 		
 		ServerSocket socket;
 		try {
