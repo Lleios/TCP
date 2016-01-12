@@ -3,10 +3,12 @@ import java.net.Socket;
 
 public class Client{
 
-	public static void main(String[] zero){
+	public static void main(String[] args){
 		Socket socket;
 		try {
-			socket = new Socket("localhost",2009);
+			String implementation = ParametreFichier.getParametre("Implementation");
+			String port = ParametreFichier.getParametre("Port");
+			socket = new Socket(implementation, Integer.parseInt(port));
 			socket.close();
 		} catch (IOException e) {
 			e.printStackTrace();

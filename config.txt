@@ -1,4 +1,4 @@
 Port = 2009
 Duree_inactivite = 100
 Nb_connexions = 10
-Implementation = serveur
+Implementation = localhost
