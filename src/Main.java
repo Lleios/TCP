@@ -7,8 +7,8 @@ public class Main {
 		if(implementation.equals("bas_niveau")){
 			
 		}else if(implementation.equals("haut_niveau")){
-			Serveur.main(null);
-			Client.main(null);
+			Serveur.main(args);
+			Client.main(args);
 		}else{
 			System.out.println("L'implementation choisi est non valide !");
 		}

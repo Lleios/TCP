@@ -14,7 +14,7 @@ public class ParametreFichier {
 		FileInputStream fileStream = null;
 		String res = "";
 		try {
-			fileStream = new FileInputStream("../../config.txt");
+			fileStream = new FileInputStream("config.txt");
 			properties.load(fileStream);
 			res = properties.getProperty(prop);
 		} catch (FileNotFoundException e1) {
