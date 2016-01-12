@@ -23,7 +23,7 @@ class Accepter_clients implements Runnable {
 
 	   private ServerSocket socketserver;
 	   private Socket socket;
-	   private int nbrclient = 0;
+	   private int nbrclient = 1;
 	   
 	   public Accepter_clients(ServerSocket s){
 		   socketserver = s;
@@ -31,7 +31,7 @@ class Accepter_clients implements Runnable {
 		
 		public void run() {
 	        try {
-	        	while(true){
+	        	while(nbrclient <= Integer.parseInt(ParametreFichier.getParametre("Nb_connexions"))){
 	        		socket = socketserver.accept(); // Un client se connecte on l'accepte
 	                System.out.println("Le client numéro " + nbrclient + " est connecté !");
 	                nbrclient++;
