@@ -1,3 +1,11 @@
+/**
+* Classe Main
+*
+* la classe Main permet de choisir l'implémentation 
+*
+* @author  Gonnord Kevin, Chcouropat Youri
+*/
+
 import java.io.IOException;
 
 public class Main {

@@ -1,3 +1,11 @@
+/**
+* Classe Serveur
+*
+* la classe Serveur permet la création d'un Thread pour le serveur
+*
+* @author  Gonnord Kevin, Chcouropat Youri
+*/
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
