@@ -17,8 +17,8 @@ public class TestClientTCP {
     PrintStream theOutputStream;
 
     try {
-//      InetAddress serveur = InetAddress.getByName(args[0]);
-      socket = new Socket("localhost", port);
+      InetAddress serveur = InetAddress.getLocalHost();
+      socket = new Socket(serveur, port);
 
       BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       PrintStream out = new PrintStream(socket.getOutputStream());

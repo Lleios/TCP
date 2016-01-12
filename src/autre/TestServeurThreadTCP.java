@@ -7,7 +7,7 @@ import java.net.Socket;
 
 public class TestServeurThreadTCP extends Thread {
 
-  final static int port = 2009;
+  final static int port = 9632;
   private Socket socket;
 
   public static void main(String[] args) {
