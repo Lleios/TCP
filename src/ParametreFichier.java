@@ -1,3 +1,14 @@
+/**
+* Classe ParametreFichier
+*
+* la classe ParametreFichier permet de configurer : - le port utilisé
+* 													- durée d'inactivité du client avant sa déconnexion
+* 													- le nombre maximum de connexion simultanée
+* 													- le type d'implémentation 
+*
+* @author  Gonnord Kevin, Chcouropat Youri
+*/
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;

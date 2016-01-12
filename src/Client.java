@@ -1,3 +1,11 @@
+/**
+* Classe Client
+*
+* la classe Client, représente un client se connectant au serveur
+*
+* @author  Gonnord Kevin, Chcouropat Youri
+*/
+
 import java.io.IOException;
 import java.net.Socket;
 
