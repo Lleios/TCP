@@ -18,6 +18,14 @@ public class ParametreFichier {
 
 	public ParametreFichier (){}
 
+	/**
+	 * Méthode getParametre
+	 * 
+	 * La méthode retourne la propriété précisée par la chaîne donnée en paramètre
+	 * 
+	 * @param prop
+	 * @return res
+	 */
 	static public String getParametre(String prop) {
 		Properties properties = new Properties();
 		FileInputStream fileStream = null;

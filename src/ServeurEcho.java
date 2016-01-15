@@ -17,6 +17,13 @@ import java.net.ServerSocket;
   public class ServeurEcho extends Thread {
      private final static int PORT = Integer.parseInt(ParametreFichier.getParametre("Port"));
 
+	 /**
+	  * Méthode affiche
+	  * 
+	  * La méthode affiche la chaine de caractère entrée en paramètre
+	  * 
+	  * @param s
+	  */
      private static void affiche (String s) {
         System.out.println ("Serveur:  " + s);
      }
@@ -41,6 +48,13 @@ import java.net.ServerSocket;
      protected PrintWriter out;
      protected final static boolean auto_flush = true;
 
+     /**
+      * Constructeur de la classe ServeurEcho
+      * 
+      * Il prend en paramètre un Socket
+      * 
+      * @param clientSocket
+      */
      public ServeurEcho (Socket clientSocket) {
         client = clientSocket;
         affiche ("Serveur: adresse du client -> " + client.getInetAddress());
@@ -54,6 +68,10 @@ import java.net.ServerSocket;
         }
      }
 
+     /**
+      * Implémentation de la méthode 
+      * 
+      */
     public void run () {
         affiche ("Nouveau Thread client");
         try {
