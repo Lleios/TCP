@@ -16,6 +16,7 @@ import java.net.ServerSocket;
 
   public class ServeurEcho extends Thread {
      private final static int PORT = Integer.parseInt(ParametreFichier.getParametre("Port"));
+     private final static int LIMITECLIENTS = Integer.parseInt(ParametreFichier.getParametre("Nb_connexions"));
 
 	 /**
 	  * Méthode affiche
@@ -29,10 +30,9 @@ import java.net.ServerSocket;
      }
 
      public static void main (String[] args) {
-        int port = PORT;
         try {
-           final ServerSocket serveurSocket = new ServerSocket(port);
-           affiche("listening on port " + port);
+           final ServerSocket serveurSocket = new ServerSocket(PORT,LIMITECLIENTS);
+           affiche("listening on port " + PORT);
            while (true) {
               Socket clientSocket = serveurSocket.accept();
               // fork off an independent thread to deal with the client
@@ -69,14 +69,16 @@ import java.net.ServerSocket;
      }
 
      /**
-      * Implémentation de la méthode 
+      * Implémentation de la méthode run de la classe Thread
+      * 
+      * 
       * 
       */
     public void run () {
         affiche ("Nouveau Thread client");
         try {
            String line;
-           while ((line=br.readLine()) != null) {
+           while ((line=br.readLine()) != ".") {
               out.println (line);
            }
         } catch (IOException e) {

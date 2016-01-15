@@ -29,12 +29,11 @@ import java.net.Socket;
      }
   
      public static void main (String[] args) {
-        int port = PORT;
         Socket s = null;
         
         try {
             // Creer un socket pour communiquer avec le hote et le port specifie
-            s = new Socket ("localhost", port);
+            s = new Socket ("localhost", PORT);
             
             // Creer un stream pour lire et ecrire des lignes de texte depuis et vers ce socket
             BufferedReader sin = new BufferedReader (new InputStreamReader (s.getInputStream()));
@@ -52,13 +51,12 @@ import java.net.Socket;
                System.out.flush();
                // Lire la ligne 
                line = in.readLine();
-               if (line == null) break;
                affiche ("ligne envoye au serveur: " + line);
                sout.println (line);
                line = sin.readLine();
    
                // Verifier si la connection est ferme 
-               if (line == null) { 
+               if (line.equals(".")) { 
                   affiche ("connection ferme par le serveur");
                   break;
                }
