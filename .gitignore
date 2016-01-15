@@ -51,3 +51,4 @@ Temporary Items
 # Eclipse
 .project
 .classpath
+/target/

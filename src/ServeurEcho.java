@@ -3,7 +3,7 @@
  * 
  * La classe ServeurEcho permet de crééer un Thread pour le serveur
  * 
- *  @author  Gonnord Kevin, Chcouropat Youri
+ * @author  Gonnord Kevin, Chcouropat Youri
  */
 
 import java.net.Socket;
@@ -71,14 +71,14 @@ import java.net.ServerSocket;
      /**
       * Implémentation de la méthode run de la classe Thread
       * 
-      * 
+      * Recupère la saisie du client et arrête le thread si le client ecrit "."
       * 
       */
     public void run () {
         affiche ("Nouveau Thread client");
         try {
            String line;
-           while ((line=br.readLine()) != ".") {
+           while (  !((line=br.readLine()).equals(".")) ) {
               out.println (line);
            }
         } catch (IOException e) {
@@ -89,6 +89,12 @@ import java.net.ServerSocket;
         affiche ("Arrêt du Thread client.");
      }
 
+    /**
+     * Méthode Close
+     * 
+     * La méthode ferme le serveur
+     * 
+     */
      protected void close () {
         try {
            if (client!=null) client.close();
