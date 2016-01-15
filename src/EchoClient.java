@@ -1,4 +1,4 @@
-package autre;
+
 
 
 import java.io.BufferedReader;
