@@ -16,23 +16,27 @@ import java.util.Properties;
 
 public class ParametreFichier {
 
-	public ParametreFichier (){
+	public ParametreFichier (){}
 
-	}
-
-	static public String getParametre(String prop) throws IOException{
+	static public String getParametre(String prop) {
 		Properties properties = new Properties();
 		FileInputStream fileStream = null;
 		String res = "";
 		try {
-			fileStream = new FileInputStream("config.txt");
+			fileStream = new FileInputStream("./config.txt");
 			properties.load(fileStream);
 			res = properties.getProperty(prop);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
-		}finally {
-		      fileStream.close();
+		}catch (IOException e2){
+			e2.printStackTrace();
 		}
+		try {
+			fileStream.close();
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+		      
 		return res;
 	}
 }

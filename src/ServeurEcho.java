@@ -1,84 +1,79 @@
-import java.net.*; 
-import java.io.*; 
+/**
+ * Classe ServeurEcho
+ * 
+ * La classe ServeurEcho permet de crééer un Thread pour le serveur
+ * 
+ *  @author  Gonnord Kevin, Chcouropat Youri
+ */
 
-public class ServeurEcho extends Thread
-{ 
- protected Socket socketClient;
- 
- private int nbClients = 0;
+import java.net.Socket;
+import java.net.ServerSocket;
 
- public static void main(String[] args) throws IOException 
-   { 
-    ServerSocket serverSocket = null; 
-    int limiteClient = Integer.parseInt(ParametreFichier.getParametre("Nb_connexions"));
-    int port = Integer.parseInt(ParametreFichier.getParametre("Port"));
-    
-    try { 
-         serverSocket = new ServerSocket(port,limiteClient); 
-         System.out.println ("Connexion");
-         try { 
-              while (true)
-                 {
-                  System.out.println ("En attente de connexion");
-                  new ServeurEcho (serverSocket.accept()); 
-                 }
-             } 
-         catch (IOException e) 
-             { 
-              System.err.println("Connexion refusée"); 
-              System.exit(1); 
-             } 
-        } 
-    catch (IOException e) 
-        { 
-         System.err.println("le port "+port+"n'est pas disponible"); 
-         System.exit(1); 
-        } 
-    finally
-        {
-         try {
-              serverSocket.close(); 
-             }
-         catch (IOException e)
-             { 
-              System.err.println("Impossible de fermer le port "+port); 
-              System.exit(1); 
-             } 
+  import java.io.InputStreamReader;
+  import java.io.BufferedReader;
+  import java.io.PrintWriter;
+  import java.io.IOException;
+
+  public class ServeurEcho extends Thread {
+     private final static int PORT = Integer.parseInt(ParametreFichier.getParametre("Port"));
+
+     private static void affiche (String s) {
+        System.out.println ("Serveur:  " + s);
+     }
+
+     public static void main (String[] args) {
+        int port = PORT;
+        try {
+           final ServerSocket serveurSocket = new ServerSocket(port);
+           affiche("listening on port " + port);
+           while (true) {
+              Socket clientSocket = serveurSocket.accept();
+              // fork off an independent thread to deal with the client
+              new ServeurEcho (clientSocket);
+           }
+        } catch (IOException e) {
+           e.printStackTrace (System.err);
         }
-   }
+     }
 
- private ServeurEcho (Socket clientSoc)
-   {
-    socketClient = clientSoc;
-    start();
-   }
+     protected final Socket client;
+     protected BufferedReader br;
+     protected PrintWriter out;
+     protected final static boolean auto_flush = true;
 
- public void run()
-   {
-    System.out.println ("Nouveau client connecté");
-    try { 
-         PrintWriter out = new PrintWriter(socketClient.getOutputStream(), true); 
-         BufferedReader in = new BufferedReader(new InputStreamReader( socketClient.getInputStream() ) ); 
-         String inputLine; 
+     public ServeurEcho (Socket clientSocket) {
+        client = clientSocket;
+        affiche ("Serveur: adresse du client -> " + client.getInetAddress());
+        try {
+           br = new BufferedReader (new InputStreamReader (client.getInputStream()));
+           out = new PrintWriter (client.getOutputStream(), auto_flush);
+           this.start();
+        } catch (IOException e) {
+           e.printStackTrace (System.err);
+           close ();
+        }
+     }
 
-         while ((inputLine = in.readLine()) != null) 
-             { 
-              System.out.println ("Serveur: " + inputLine); 
-              out.println(inputLine); 
+    public void run () {
+        affiche ("Nouveau Thread client");
+        try {
+           String line;
+           while ((line=br.readLine()) != null) {
+              out.println (line);
+           }
+        } catch (IOException e) {
+           e.printStackTrace (System.err);
+        } finally {
+           close ();
+        }
+        affiche ("Arrêt du Thread client.");
+     }
 
-              if (inputLine.equals("quitter")){
-            	  break; 
-              }
-             } 
-
-         out.close(); 
-         in.close(); 
-         socketClient.close(); 
-        } 
-    catch (IOException e) 
-        { 
-         System.err.println("Problème avec le serveur");
-         System.exit(1); 
-        } 
-    }
-} 
+     protected void close () {
+        try {
+           if (client!=null) client.close();
+        } catch (IOException e) {
+           e.printStackTrace (System.err);
+        }
+     }
+  }
