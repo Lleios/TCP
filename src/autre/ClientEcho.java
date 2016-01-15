@@ -35,7 +35,7 @@ import java.net.Socket;
           BufferedReader in = new BufferedReader (new InputStreamReader (System.in));
            
            // Dire au client qu'il est connecte 
-           msg ("connected to "+s.getInetAddress()+" at port "+s.getPort());
+           msg ("connecte a "+s.getInetAddress()+" au port "+s.getPort());
   
            String line;
            while (true) {
@@ -44,17 +44,17 @@ import java.net.Socket;
               // Lire la ligne 
               line = in.readLine();
               if (line == null) break;
-              msg ("sending line to server: " + line);
+              msg ("ligne envoye au serveur: " + line);
               sout.println (line);
               line = sin.readLine();
   
               // Verifier si la connection est ferme 
               if (line == null) { 
-                 msg ("connection closed by server.");
+                 msg ("connection ferme par le serveur");
                  break;
               }
               // Ecrire dans la console
-              msg ("received from server:   " + line);
+              msg ("recu du serveur:   " + line);
            }
         } catch (IOException e) {
            e.printStackTrace (System.err);
